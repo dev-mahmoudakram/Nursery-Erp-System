@@ -2,11 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Nursery;
-use App\Models\User;
-use App\Support\Role;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,18 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate(
-            ['email' => 'admin@nursery-erp.test'],
-            [
-                'name' => 'مدير النظام',
-                'password' => Hash::make('password'), // غيّرها فورًا في الإنتاج
-                'role' => Role::ADMIN,
-            ]
-        );
-
-        Nursery::firstOrCreate(
-            ['code' => 'NUR-01'],
-            ['name_ar' => 'المشتل الرئيسي', 'name_en' => 'Main Nursery', 'is_active' => true]
-        );
+        $this->call(UserSeeder::class);
     }
 }
